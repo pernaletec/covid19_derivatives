@@ -30,13 +30,13 @@ Global view
 Inputs {.sidebar data-width=300}
 -------------------------------------
 
-#### About
+### About
 
 **COVID19 in derivatives** allows to monitor de rate of change of the spread of Coronavirus as well as the change of the rate of change. 
 
 In technical words you can track the __first__ and the __second derivative__ of the growing phenomena.  
 
-#### Derivative selection 
+### Derivative selection 
 
 - Actual value (zero derivative)
 - Rate of change (first derivative)
@@ -52,7 +52,7 @@ selectInput("derivative", "Derivative:",
 
 ```
 
-#### Source of data
+### Source of data
 
 Available in [Github](https://github.com/CSSEGISandData/COVID-19) by [JHU CSSE](https://systems.jhu.edu/research/public-health/ncov/). 
 
@@ -277,13 +277,13 @@ Country view
 Inputs {.sidebar data-width=300}
 -------------------------------------
 
-#### About
+### About
 
 **COVID19 in derivatives** allows to monitor de rate of change in the growing of Coronavirus as well as the change of the rate of change. 
 
 In technical words you can track the __first__ and the __second derivative__ of the growing phenomena.  
 
-#### Derivative selection 
+### Derivative selection 
 
 - Actual value (zero derivative)
 - Rate of change (first derivative)
@@ -299,7 +299,7 @@ selectInput("derivative_country", "Derivative:",
 
 ```
 
-#### Country
+### Country selection
 
 ```{r}
 
@@ -308,7 +308,7 @@ uiOutput(outputId = "country_sel")
 
 ```
 
-#### Source of data
+### Source of data
 
 Available in [Github](https://github.com/CSSEGISandData/COVID-19) by [JHU CSSE](https://systems.jhu.edu/research/public-health/ncov/). 
 
