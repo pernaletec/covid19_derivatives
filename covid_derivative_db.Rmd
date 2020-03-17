@@ -92,16 +92,19 @@ output$map_chart = renderHighchart({
   derivative = input$derivative
 
   if (derivative == 'zero') {
+    complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
     downloads = agg_i$x
     label_title = 'Current cases (# persons)'
     }
   
   if (derivative == 'first') {
+    complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
     downloads = didt
     label_title = 'Last rate of growth (#persons/day)'
     }
   
   if (derivative == 'second') {
+    complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
     downloads = ddidt
     label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
   }
@@ -201,7 +204,10 @@ output$map_chart = renderHighchart({
                 dataLabels = list(enabled = TRUE, format = '{point.name}')) %>%
     hc_colorAxis(stops = colstops) %>%
     hc_chart(backgroundColor = "#ffffff") %>%
-    hc_mapNavigation(enabled = TRUE) 
+    hc_mapNavigation(enabled = TRUE) %>% 
+    hc_title(text = paste0("Global map view of the ", complement),
+       margin = 20, align = "left",
+       style = list(useHTML = TRUE))
     
 })
 
@@ -238,18 +244,21 @@ output$line_chart = renderHighchart({
   derivative = input$derivative
 
   if (derivative == 'zero') {
+    complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
     dwnlm = genTotal_i
     label_title = 'Current cases (# persons)'
     dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/16'), by = "day")
     }
   
   if (derivative == 'first') {
+    complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
     dwnlm = genTotal_ii
     label_title = 'Last rate of growth (#persons/day)'
     dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/16'), by = "day")
     }
   
   if (derivative == 'second') {
+    complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
     dwnlm = genTotal_iii
     label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
     dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/16'), by = "day")
@@ -258,6 +267,9 @@ output$line_chart = renderHighchart({
   data_xts <- xts(dwnlm, order.by=as.Date(dates, "%d/%m/%Y"))
   
   highchart(type = "stock") %>% 
+    hc_title(text = paste0("Global view of the ", complement),
+         margin = 20, align = "left",
+         style = list(useHTML = TRUE)) %>%
     hc_yAxis_multiples(
       list(title = list(text = label_title))
     ) %>% 
@@ -354,18 +366,21 @@ output$line_chart_country = renderHighchart({
     derivative = input$derivative_country
   
     if (derivative == 'zero') {
+      complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
       dwnlm = genTotal_i
       label_title = 'Current cases (# persons)'
       dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/16'), by = "day")
       }
     
     if (derivative == 'first') {
+      complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
       dwnlm = genTotal_ii
       label_title = 'Last rate of growth (#persons/day)'
       dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/16'), by = "day")
       }
     
     if (derivative == 'second') {
+      complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
       dwnlm = genTotal_iii
       label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
       dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/16'), by = "day")
@@ -376,6 +391,9 @@ output$line_chart_country = renderHighchart({
     data_xts <- xts(dwnlm, order.by=as.Date(dates, "%d/%m/%Y"))
     
     highchart(type = "stock") %>% 
+    hc_title(text = paste0("Country view of the ", complement),
+         margin = 20, align = "left",
+         style = list(useHTML = TRUE)) %>%      
       hc_yAxis_multiples(
         list(title = list(text = label_title))
       ) %>% 
