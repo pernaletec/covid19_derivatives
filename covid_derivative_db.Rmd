@@ -291,7 +291,7 @@ Inputs {.sidebar data-width=300}
 
 ### About
 
-**COVID19 in derivatives** allows to monitor de rate of change in the growing of Coronavirus as well as the change of the rate of change. 
+**COVID-19 in derivatives** allows to monitor three features of the growing behaviour of the disease, the current amount of infected people, the rate of infectability in persons per day and the change of this rate of infectability in time. 
 
 In technical words you can track the __first__ and the __second derivative__ of the growing phenomena.  
 
