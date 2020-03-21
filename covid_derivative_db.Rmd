@@ -72,9 +72,9 @@ output$map_chart = renderHighchart({
   
   #(head(confirmed))
   
-  agg_i = aggregate(confirmed$X3.18.20, by=list(confirmed$Country.Region), sum)
-  agg_ii = aggregate(confirmed$X3.17.20, by=list(confirmed$Country.Region), sum)
-  agg_iii = aggregate(confirmed$X3.16.20, by=list(confirmed$Country.Region), sum)
+  agg_i = aggregate(confirmed$X3.19.20, by=list(confirmed$Country.Region), sum)
+  agg_ii = aggregate(confirmed$X3.18.20, by=list(confirmed$Country.Region), sum)
+  agg_iii = aggregate(confirmed$X3.17.20, by=list(confirmed$Country.Region), sum)
   
   #print(agg_i)
   
@@ -247,21 +247,21 @@ output$line_chart = renderHighchart({
     complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
     dwnlm = genTotal_i
     label_title = 'Current cases (# persons)'
-    dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/18'), by = "day")
+    dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/19'), by = "day")
     }
   
   if (derivative == 'first') {
     complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
     dwnlm = genTotal_ii
     label_title = 'Last rate of growth (#persons/day)'
-    dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/18'), by = "day")
+    dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/19'), by = "day")
     }
   
   if (derivative == 'second') {
     complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
     dwnlm = genTotal_iii
     label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
-    dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/18'), by = "day")
+    dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/19'), by = "day")
   }
   
   data_xts <- xts(dwnlm, order.by=as.Date(dates, "%d/%m/%Y"))
@@ -343,7 +343,7 @@ output$line_chart_country = renderHighchart({
     
     country = input$country_sel
     
-    print(head(confirmed))
+    #print(head(confirmed))
     
     genTotal_i = apply(X = confirmed[confirmed$Country.Region == country,5:length(confirmed[1,])],2, FUN = sum)
   
@@ -369,21 +369,21 @@ output$line_chart_country = renderHighchart({
       complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
       dwnlm = genTotal_i
       label_title = 'Current cases (# persons)'
-      dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/18'), by = "day")
+      dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/19'), by = "day")
       }
     
     if (derivative == 'first') {
       complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
       dwnlm = genTotal_ii
       label_title = 'Last rate of growth (#persons/day)'
-      dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/18'), by = "day")
+      dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/19'), by = "day")
       }
     
     if (derivative == 'second') {
       complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
       dwnlm = genTotal_iii
       label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
-      dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/18'), by = "day")
+      dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/19'), by = "day")
     }
     
     ### end new code    
@@ -414,11 +414,11 @@ output$country_sel <- renderUI({
   
  all_countries = sort(unique(confirmed[,2]))
  
- print('all_countries')
- print(all_countries)
+ #print('all_countries')
+ #print(all_countries)
  
- print('input$country_sel')
- print(input$country_sel)
+ #print('input$country_sel')
+ #print(input$country_sel)
     
   if (!is.null(input$country_sel)) selectInput(inputId = "country_sel", label = "Country", choices = all_countries, selected = input$country_sel)
   else selectInput(inputId = "country_sel", label = "Country", choices = all_countries, selected = "Venezuela")
