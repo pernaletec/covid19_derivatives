@@ -68,13 +68,13 @@ output$map_chart = renderHighchart({
   
   library('httr')
   
-  confirmed = read.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv', stringsAsFactors = FALSE)
+  confirmed = read.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv', stringsAsFactors = FALSE)
   
-  #(head(confirmed))
+  print(head(confirmed))
   
-  agg_i = aggregate(confirmed$X3.23.20, by=list(confirmed$Country.Region), sum)
-  agg_ii = aggregate(confirmed$X3.22.20, by=list(confirmed$Country.Region), sum)
-  agg_iii = aggregate(confirmed$X3.21.20, by=list(confirmed$Country.Region), sum)
+  agg_i = aggregate(confirmed$X3.24.20, by=list(confirmed$Country.Region), sum)
+  agg_ii = aggregate(confirmed$X3.23.20, by=list(confirmed$Country.Region), sum)
+  agg_iii = aggregate(confirmed$X3.22.20, by=list(confirmed$Country.Region), sum)
   
   #print(agg_i)
   
@@ -182,13 +182,11 @@ output$map_chart = renderHighchart({
   countries = countries[!toRemove]
   downloads = downloads[!toRemove]
   
-  print(table(countries %in% mapdata$name))
-  
-  
+  #print(table(countries %in% mapdata$name))
   
   data_world_downloads = data.frame(countries, downloads)
   
-  print(data_world_downloads)
+  #print(data_world_downloads)
   
   n <- 4
   colstops <- data.frame(q = 0:n/n,
@@ -227,7 +225,7 @@ output$line_chart = renderHighchart({
     
   library('httr')
   
-  confirmed = read.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv', stringsAsFactors = FALSE)
+  confirmed = read.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv', stringsAsFactors = FALSE)
   
 
   genTotal_i = apply(X = confirmed[,5:length(confirmed[1,])],2, FUN = sum)
@@ -251,21 +249,21 @@ output$line_chart = renderHighchart({
     complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
     dwnlm = genTotal_i
     label_title = 'Current cases (# persons)'
-    dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/23'), by = "day")
+    dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/24'), by = "day")
     }
   
   if (derivative == 'first') {
     complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
     dwnlm = genTotal_ii
     label_title = 'Last rate of growth (#persons/day)'
-    dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/23'), by = "day")
+    dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/24'), by = "day")
     }
   
   if (derivative == 'second') {
     complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
     dwnlm = genTotal_iii
     label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
-    dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/23'), by = "day")
+    dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/24'), by = "day")
   }
   
   data_xts <- xts(dwnlm, order.by=as.Date(dates, "%d/%m/%Y"))
@@ -340,7 +338,7 @@ output$line_chart_country = renderHighchart({
  
   library('httr')
   
-  confirmed = read.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv', stringsAsFactors = FALSE)
+  confirmed = read.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv', stringsAsFactors = FALSE)
   
   
   if (!is.null(input$country_sel)){
@@ -373,21 +371,21 @@ output$line_chart_country = renderHighchart({
       complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
       dwnlm = genTotal_i
       label_title = 'Current cases (# persons)'
-      dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/22'), by = "day")
+      dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/24'), by = "day")
       }
     
     if (derivative == 'first') {
       complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
       dwnlm = genTotal_ii
       label_title = 'Last rate of growth (#persons/day)'
-      dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/22'), by = "day")
+      dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/24'), by = "day")
       }
     
     if (derivative == 'second') {
       complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
       dwnlm = genTotal_iii
       label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
-      dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/22'), by = "day")
+      dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/24'), by = "day")
     }
     
     ### end new code    
@@ -414,7 +412,7 @@ output$country_sel <- renderUI({
 
   library('httr')
   
-  confirmed = read.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv', stringsAsFactors = FALSE)
+  confirmed = read.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv', stringsAsFactors = FALSE)
   
  all_countries = sort(unique(confirmed[,2]))
  
