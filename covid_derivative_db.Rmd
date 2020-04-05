@@ -70,11 +70,11 @@ output$map_chart = renderHighchart({
   
   confirmed = read.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv', stringsAsFactors = FALSE)
   
-  print(head(confirmed))
+  #print(head(confirmed))
   
-  agg_i = aggregate(confirmed$X3.30.20, by=list(confirmed$Country.Region), sum)
-  agg_ii = aggregate(confirmed$X3.29.20, by=list(confirmed$Country.Region), sum)
-  agg_iii = aggregate(confirmed$X3.28.20, by=list(confirmed$Country.Region), sum)
+  agg_i = aggregate(confirmed$X4.4.20, by=list(confirmed$Country.Region), sum)
+  agg_ii = aggregate(confirmed$X4.3.20, by=list(confirmed$Country.Region), sum)
+  agg_iii = aggregate(confirmed$X4.2.20, by=list(confirmed$Country.Region), sum)
   
   #print(agg_i)
   
@@ -249,21 +249,21 @@ output$line_chart = renderHighchart({
     complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
     dwnlm = genTotal_i
     label_title = 'Current cases (# persons)'
-    dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/30'), by = "day")
+    dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/04/04'), by = "day")
     }
   
   if (derivative == 'first') {
     complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
     dwnlm = genTotal_ii
     label_title = 'Last rate of growth (#persons/day)'
-    dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/30'), by = "day")
+    dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/04/04'), by = "day")
     }
   
   if (derivative == 'second') {
     complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
     dwnlm = genTotal_iii
     label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
-    dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/30'), by = "day")
+    dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/04/04'), by = "day")
   }
   
   data_xts <- xts(dwnlm, order.by=as.Date(dates, "%d/%m/%Y"))
@@ -371,21 +371,21 @@ output$line_chart_country = renderHighchart({
       complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
       dwnlm = genTotal_i
       label_title = 'Current cases (# persons)'
-      dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/03/30'), by = "day")
+      dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/04/04'), by = "day")
       }
     
     if (derivative == 'first') {
       complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
       dwnlm = genTotal_ii
       label_title = 'Last rate of growth (#persons/day)'
-      dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/03/30'), by = "day")
+      dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/04/04'), by = "day")
       }
     
     if (derivative == 'second') {
       complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
       dwnlm = genTotal_iii
       label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
-      dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/03/30'), by = "day")
+      dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/04/04'), by = "day")
     }
     
     ### end new code    
