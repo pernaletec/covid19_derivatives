@@ -33,15 +33,19 @@ Inputs {.sidebar data-width=300}
 
 ### About
 
-**COVID-19 in derivatives** allows to monitor three features of the growing behaviour of the disease, the current amount of infected people, the rate of infectability in persons per day and the change of this rate of infectability in time. 
+With **COVID-19 in derivatives** you can monitor per country:
 
-In technical words you can track the __first__ and the __second derivative__ of the growing phenomena.  
+- Current amount of infected people (Zero derivative)
+- Rate of infectability in persons per day (First derivative)  
+- Change of Rate of infectability in time (Second derivative)
+
+In technical words you can track the __zero__, __first__ and __second derivative__ of the growing phenomena.  
 
 ### Derivative selection 
 
-- Actual value (zero derivative)
-- Rate of change (first derivative)
-- Change of rate of change (second derivative)
+- Current value (Zero derivative)
+- Rate of change (First derivative)
+- Change of rate of change (Second derivative)
 
 ```{r}
 
@@ -73,9 +77,9 @@ output$map_chart = renderHighchart({
   
   #print(head(confirmed))
   
-  agg_i = aggregate(confirmed$X4.21.20, by=list(confirmed$Country.Region), sum)
-  agg_ii = aggregate(confirmed$X4.20.20, by=list(confirmed$Country.Region), sum)
-  agg_iii = aggregate(confirmed$X4.19.20, by=list(confirmed$Country.Region), sum)
+  agg_i = aggregate(confirmed$X7.9.20, by=list(confirmed$Country.Region), sum)
+  agg_ii = aggregate(confirmed$X7.8.20, by=list(confirmed$Country.Region), sum)
+  agg_iii = aggregate(confirmed$X7.7.20, by=list(confirmed$Country.Region), sum)
   
   #print(agg_i)
   
@@ -237,7 +241,6 @@ output$line_chart = renderHighchart({
     genTotal_ii[i-1] = genTotal_i[i] - genTotal_i[i-1]
   } 
   
-  
   genTotal_iii = rep(0,length(genTotal_ii)-1)
   
   for (i in length(genTotal_ii):2) {
@@ -250,21 +253,21 @@ output$line_chart = renderHighchart({
     complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
     dwnlm = genTotal_i
     label_title = 'Current cases (# persons)'
-    dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/04/21'), by = "day")
+    dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/07/09'), by = "day")
     }
   
   if (derivative == 'first') {
     complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
     dwnlm = genTotal_ii
     label_title = 'Last rate of growth (#persons/day)'
-    dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/04/21'), by = "day")
+    dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/07/09'), by = "day")
     }
   
   if (derivative == 'second') {
     complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
     dwnlm = genTotal_iii
     label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
-    dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/04/21'), by = "day")
+    dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/07/09'), by = "day")
   }
   
   data_xts <- xts(dwnlm, order.by=as.Date(dates, "%d/%m/%Y"))
@@ -294,15 +297,19 @@ Inputs {.sidebar data-width=300}
 
 ### About
 
-**COVID-19 in derivatives** allows to monitor three features of the growing behaviour of the disease, the current amount of infected people, the rate of infectability in persons per day and the change of this rate of infectability in time. 
+With **COVID-19 in derivatives** you can monitor per country:
 
-In technical words you can track the __first__ and the __second derivative__ of the growing phenomena.  
+- Current amount of infected people (Zero derivative)
+- Rate of infectability in persons per day (First derivative)  
+- Change of Rate of infectability in time (Second derivative)
+
+In technical words you can track the __zero__, __first__ and __second derivative__ of the growing phenomena.  
 
 ### Derivative selection 
 
-- Actual value (zero derivative)
-- Rate of change (first derivative)
-- Change of rate of change (second derivative)
+- Current value (Zero derivative)
+- Rate of change (First derivative)
+- Change of rate of change (Second derivative)
 
 ```{r}
 
@@ -372,21 +379,21 @@ output$line_chart_country = renderHighchart({
       complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
       dwnlm = genTotal_i
       label_title = 'Current cases (# persons)'
-      dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/04/21'), by = "day")
+      dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/07/09'), by = "day")
       }
     
     if (derivative == 'first') {
       complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
       dwnlm = genTotal_ii
       label_title = 'Last rate of growth (#persons/day)'
-      dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/04/21'), by = "day")
+      dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/07/09'), by = "day")
       }
     
     if (derivative == 'second') {
       complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
       dwnlm = genTotal_iii
       label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
-      dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/04/21'), by = "day")
+      dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/07/09'), by = "day")
     }
     
     ### end new code    
