@@ -251,23 +251,23 @@ output$line_chart = renderHighchart({
 
   if (derivative == 'zero') {
     complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
-    dwnlm = genTotal_i
     label_title = 'Current cases (# persons)'
     dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/07/09'), by = "day")
+    dwnlm = genTotal_i[1:length(dates)]
     }
   
   if (derivative == 'first') {
     complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
-    dwnlm = genTotal_ii
     label_title = 'Last rate of growth (#persons/day)'
     dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/07/09'), by = "day")
-    }
+    dwnlm = genTotal_ii[1:length(dates)]
+  }
   
   if (derivative == 'second') {
     complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
-    dwnlm = genTotal_iii
     label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
     dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/07/09'), by = "day")
+    dwnlm = genTotal_iii[1:length(dates)]
   }
   
   data_xts <- xts(dwnlm, order.by=as.Date(dates, "%d/%m/%Y"))
@@ -353,19 +353,13 @@ output$line_chart_country = renderHighchart({
     
     country = input$country_sel
     
-    #print(head(confirmed))
-    
     genTotal_i = apply(X = confirmed[confirmed$Country.Region == country,5:length(confirmed[1,])],2, FUN = sum)
   
-    #print('genTotal_i')
-    #print(genTotal_i)
-    
     genTotal_ii = rep(0,length(genTotal_i)-1)
     
     for (i in length(genTotal_i):2) {
       genTotal_ii[i-1] = genTotal_i[i] - genTotal_i[i-1]
     } 
-    
     
     genTotal_iii = rep(0,length(genTotal_ii)-1)
     
@@ -377,28 +371,30 @@ output$line_chart_country = renderHighchart({
   
     if (derivative == 'zero') {
       complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
-      dwnlm = genTotal_i
       label_title = 'Current cases (# persons)'
       dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/07/09'), by = "day")
-      }
-    
+      dwnlm = genTotal_i[1:length(dates)]
+    }
+
     if (derivative == 'first') {
       complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
-      dwnlm = genTotal_ii
       label_title = 'Last rate of growth (#persons/day)'
       dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/07/09'), by = "day")
+      dwnlm = genTotal_ii[1:length(dates)]
       }
     
     if (derivative == 'second') {
       complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
-      dwnlm = genTotal_iii
       label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
       dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/07/09'), by = "day")
+      dwnlm = genTotal_iii[1:length(dates)]
     }
     
     ### end new code    
   
     data_xts <- xts(dwnlm, order.by=as.Date(dates, "%d/%m/%Y"))
+    
+    #print(data_xts)
     
     highchart(type = "stock") %>% 
     hc_title(text = paste0("Country view of the ", complement),
@@ -424,17 +420,8 @@ output$country_sel <- renderUI({
   
  all_countries = sort(unique(confirmed[,2]))
  
- #print('all_countries')
- #print(all_countries)
- 
- #print('input$country_sel')
- #print(input$country_sel)
-    
   if (!is.null(input$country_sel)) selectInput(inputId = "country_sel", label = "Country", choices = all_countries, selected = input$country_sel)
   else selectInput(inputId = "country_sel", label = "Country", choices = all_countries, selected = "Venezuela")
- 
- #selectInput(inputId = "country_sel", label = "Country", choices = all_countries, selected)
- 
  
 })
 
