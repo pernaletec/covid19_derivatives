@@ -77,9 +77,9 @@ output$map_chart = renderHighchart({
   
   #print(head(confirmed))
   
-  agg_i = aggregate(confirmed$X7.9.20, by=list(confirmed$Country.Region), sum)
-  agg_ii = aggregate(confirmed$X7.8.20, by=list(confirmed$Country.Region), sum)
-  agg_iii = aggregate(confirmed$X7.7.20, by=list(confirmed$Country.Region), sum)
+  agg_i = aggregate(confirmed$X7.10.20, by=list(confirmed$Country.Region), sum)
+  agg_ii = aggregate(confirmed$X7.9.20, by=list(confirmed$Country.Region), sum)
+  agg_iii = aggregate(confirmed$X7.8.20, by=list(confirmed$Country.Region), sum)
   
   #print(agg_i)
   
@@ -252,21 +252,21 @@ output$line_chart = renderHighchart({
   if (derivative == 'zero') {
     complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
     label_title = 'Current cases (# persons)'
-    dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/07/09'), by = "day")
+    dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/07/10'), by = "day")
     dwnlm = genTotal_i[1:length(dates)]
     }
   
   if (derivative == 'first') {
     complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
     label_title = 'Last rate of growth (#persons/day)'
-    dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/07/09'), by = "day")
+    dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/07/10'), by = "day")
     dwnlm = genTotal_ii[1:length(dates)]
   }
   
   if (derivative == 'second') {
     complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
     label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
-    dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/07/09'), by = "day")
+    dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/07/10'), by = "day")
     dwnlm = genTotal_iii[1:length(dates)]
   }
   
@@ -372,22 +372,23 @@ output$line_chart_country = renderHighchart({
     if (derivative == 'zero') {
       complement = "<i>current</i> amount of persons infected (#persons) <b>Zero derivative</b>"
       label_title = 'Current cases (# persons)'
-      dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/07/09'), by = "day")
+      dates = seq(from = as.Date('2020/01/22'), to = as.Date('2020/07/10'), by = "day")
       dwnlm = genTotal_i[1:length(dates)]
     }
 
     if (derivative == 'first') {
       complement = "<i>rate of change</i> of persons infected (#(new)persons/day) <b>First derivative</b>"
       label_title = 'Last rate of growth (#persons/day)'
-      dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/07/09'), by = "day")
+      dates = seq(from = as.Date('2020/01/23'), to = as.Date('2020/07/10'), by = "day")
       dwnlm = genTotal_ii[1:length(dates)]
       }
     
     if (derivative == 'second') {
       complement = "<i>Variation of the rate of change</i> of persons infected ((#persons/day)/day) <b>Second derivative</b>"
       label_title = 'Diff. in last rates of growths ((#persons/day)/day)'
-      dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/07/09'), by = "day")
-      dwnlm = genTotal_iii[1:length(dates)]
+      dates = seq(from = as.Date('2020/01/24'), to = as.Date('2020/07/10'), by = "day")
+      dwnlm = genTotal_ii
+      i[1:length(dates)]
     }
     
     ### end new code    
@@ -426,4 +427,3 @@ output$country_sel <- renderUI({
 })
 
 ```
-
